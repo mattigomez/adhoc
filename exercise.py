@@ -10,27 +10,30 @@ lista_personas = [
 
 def ordenar(lista_personas):
     """ El metodo debe devolver una lista con las edades ordenadas de menor a mayor"""
-    # Completar
-    pass
+    return sorted([edades[3] for edades in lista_personas ])
 
 
 def convertir_a_diccionario(lista_personas):
     """ Hacer un diccionario que tenga como claves los “dni” y como valores tuplas con nombre, apellido y edad """
-    # Completar
-    pass
+    diccionario = {}
+    for dni,nombre,apellido,edad in lista_personas :
+        diccionario[dni] = (nombre,apellido,edad)
+    return diccionario
 
 
 def devolver_edad(lista_personas, dni):
     """ Para la 'lista_personas' devuelve la edad de la persona que tenga el dni definido.
     Tip: intentar usar el método convertir_a_diccionario"""
-    # Completar
-    pass
+    diccionario = convertir_a_diccionario(lista_personas)
+    if dni in diccionario:
+        return diccionario[dni][2]
+    else:
+        return "No se encontro ninguna persona con ese dni"
 
 
 def eliminar_repetidos(lista_personas):
     """ El metodo debe devolver los elementos unicos """
-    # Completar
-    pass
+    return list(set(lista_personas))
 
 
 def separar_por_edad(lista_personas):
@@ -38,15 +41,24 @@ def separar_por_edad(lista_personas):
     * lista 1: mayores de 25 (incluido)
     * lista 2: menores de 25
     """
-    # Completar
-    return [], []
+    mayores_de_25 = []
+    menores_de_25 = []
+    for persona in lista_personas:
+        if persona[3] >= 25:
+            mayores_de_25.append(persona)
+        else:
+            menores_de_25.append(persona)
+    return mayores_de_25,menores_de_25
 
 
 def obtener_promedio(lista):
     """ Implementar obtener el promedio de la lista de números que se recibe.
     Capturar con un try/except la excepción de dividir por cero"""
-    # Completar
-    pass
+    try:
+        promedio = sum(lista) / len(lista)
+    except ZeroDivisionError:
+        return "No se puede calcular el promedio de una lista vacia"
+    return promedio
 
 
 def main():
@@ -60,3 +72,6 @@ def main():
     print(' * Los menores de 25 son: %s\n' % separar_por_edad(lista_personas)[1])
     print(' * El promedio de las edades es: %s\n' % obtener_promedio(ordenar(lista_personas)))
     print(' * El promedio de una lista vacía es: %s\n' % obtener_promedio([]))
+
+if __name__ == "__main__":
+    main()
